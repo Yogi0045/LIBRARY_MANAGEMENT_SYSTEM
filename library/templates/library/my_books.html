@@ -1,0 +1,78 @@
+{% extends 'library/base.html' %}
+{% block title %}My Issued Books{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to bottom right, #1c1c1c, #3d3d3d);
+        color: white;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .book-heading {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .table {
+        background-color: #2e2e2e;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .table th {
+        background-color: #1a1a1a;
+        color: #ccc;
+    }
+
+    .table td {
+        background-color: #3a3a3a;
+        color: white;
+        vertical-align: middle;
+    }
+
+    .btn-return {
+        background-color: #ffc107;
+        border: none;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 5px 15px;
+        box-shadow: 2px 2px 0 #000;
+        transition: 0.2s;
+    }
+
+    .btn-return:hover {
+        background-color: #e0a800;
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="book-heading">My Issued Books</div>
+
+<table class="table table-hover text-center">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>
+                <a href="{% url 'return_book' book.id %}" class="btn btn-return">Return</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No books issued yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

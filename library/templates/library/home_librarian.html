@@ -1,0 +1,34 @@
+{% extends 'library/base.html' %}
+{% block title %}Librarian Panel{% endblock %}
+
+{% block content %}
+<h2>Manage Books</h2>
+<div class="row">
+    {% for book in books %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <p class="card-text">By {{ book.author }}</p>
+                <p>Status: {% if book.is_issued %}<span class="text-danger">Issued</span>{% else %}<span class="text-success">Available</span>{% endif %}</p>
+                <a href="{% url 'delete_book' book.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<hr>
+<h3>Pending Borrow Requests</h3>
+<ul class="list-group">
+    {% for req in requests %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ req.user.username }} requests <strong>{{ req.book.title }}</strong>
+        <a href="{{ req.id_proof.url }}" class="btn btn-secondary btn-sm" target="_blank">View ID</a>
+        <a href="{% url 'approve_request' req.id %}" class="btn btn-success btn-sm">Approve</a>
+    </li>
+    {% empty %}
+    <p>No pending requests.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

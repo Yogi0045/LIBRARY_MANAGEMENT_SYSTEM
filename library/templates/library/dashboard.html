@@ -1,0 +1,70 @@
+{% extends 'library/base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to bottom right, #1c1c1c, #3d3d3d);
+        color: white;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .dashboard-heading {
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .card {
+        background-color: #2c2c2c;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 4px 4px 0 #000;
+        padding: 20px;
+        margin-bottom: 20px;
+        color: white;
+        text-align: center;
+        transition: 0.3s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.02);
+        box-shadow: 6px 6px 0 #000;
+    }
+
+    .card h5 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #ccc;
+    }
+
+    .card .card-text {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="dashboard-heading">Admin Dashboard</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-dark">
+            <h5>Total Books</h5>
+            <p class="card-text">{{ total_books }}</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success">
+            <h5>Issued Books</h5>
+            <p class="card-text">{{ issued_books }}</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-primary">
+            <h5>Registered Users</h5>
+            <p class="card-text">{{ users }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

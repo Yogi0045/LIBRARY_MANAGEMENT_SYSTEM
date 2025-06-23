@@ -1,0 +1,81 @@
+{% extends 'library/base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to bottom right, #1c1c1c, #3d3d3d);
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .home-heading {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .book-card {
+        background-color: #2e2e2e;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 4px 4px 0 #000;
+        color: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: 0.3s ease;
+    }
+
+    .book-card:hover {
+        transform: scale(1.03);
+        box-shadow: 6px 6px 0 #000;
+    }
+
+    .book-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+
+    .book-author {
+        font-size: 1rem;
+        color: #ccc;
+    }
+
+    .btn-issue {
+        background-color: #28a745;
+        border: none;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 8px 16px;
+        box-shadow: 2px 2px 0 #000;
+    }
+
+    .btn-issue:hover {
+        background-color: #218838;
+    }
+
+    .row-gap {
+        row-gap: 20px;
+    }
+</style>
+
+<div class="home-heading">Available Books</div>
+<div class="row row-gap">
+    {% for book in books %}
+    <div class="col-md-4">
+        <div class="book-card">
+            <div class="book-title">{{ book.title }}</div>
+            <div class="book-author">by {{ book.author }}</div>
+            {% if not book.is_issued %}
+                <a href="{% url 'issue_book' book.id %}" class="btn btn-issue mt-3">Issue</a>
+            {% else %}
+                <span class="badge bg-secondary mt-3">Issued</span>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">No books available right now.</p>
+    {% endfor %}
+</div>
+{% endblock %}
