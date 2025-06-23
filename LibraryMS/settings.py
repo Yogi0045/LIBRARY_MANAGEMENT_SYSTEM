@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url as db_url
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -139,7 +139,7 @@ MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 # Use PostgreSQL from Render
 DATABASES = {
-    'default': ddb_url.config(default='sqlite:///db.sqlite3')
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
 }
 # Render deployment optimization
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
